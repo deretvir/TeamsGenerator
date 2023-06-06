@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 
-function NumberChangeBtn( {addCounter,sign, radius}){
-  return ( <button
-          className={`bg-orange-400 w-14 ${radius} text-white h-full`}
-          onClick={addCounter}
-        >
-          {sign}
-        </button>)
+function NumberChangeBtn({ addCounter, sign, radius }) {
+  return (
+    <button
+      className={`bg-orange-400 w-14 ${radius} text-white h-full`}
+      onClick={addCounter}
+    >
+      {sign}
+    </button>
+  );
+}
+
+
+function TeamsDivisionMethod({ isTeamsActive, text, handleUserChoice, color1, color2 }) {
+  return (
+    <button
+      className={`${isTeamsActive ? color1: color2} flex-1`}
+      onClick={() => handleUserChoice()}
+    >
+      {text}
+    </button>
+  );
 }
 
 const NumberTeamsOrPlayers = () => {
@@ -30,24 +44,10 @@ const NumberTeamsOrPlayers = () => {
   return (
     <>
       <div className="flex justify-between items-center m-0">
-        <button
-          className={` ${
-            isTeamsActive ? "bg-orange-400" : "bg-gray-500"
-          } flex-1`}
-          onClick={() => handleUserChoice(true)}
-        >
-          Number of teams
-        </button>
-        <button
-          className={`${
-            isTeamsActive ? "bg-gray-500" : "bg-orange-400"
-          } flex-1`}
-          onClick={() => handleUserChoice(false)}
-        >
-          Number of players in one team
-        </button>
+       <TeamsDivisionMethod isTeamsActive={isTeamsActive} text="number of teams" color1="bg-orange-400" color2="bg-gray-500" handleUserChoice={() => handleUserChoice(true)}/>
+       <TeamsDivisionMethod isTeamsActive={isTeamsActive} text="number players in team" color1="bg-gray-500" color2="bg-orange-400" handleUserChoice={() => handleUserChoice(false)} />
       </div>
-
+      
       <div className="flex flex-row h-12 w-full justify-between items-start py-0 m-0 border border-stone-700 rounded-md border-opacity-40">
      <NumberChangeBtn addCounter={minusCounter} sign="-" radius="rounded-l-md"/>
         <div className="bg-stone-[rgb(128, 128, 129)]] h-full  w-full flex justify-center items-center px-8">
