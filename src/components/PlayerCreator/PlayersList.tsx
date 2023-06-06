@@ -1,12 +1,9 @@
 import React from "react";
 
-function PlayersList({ players, deletePlayer }) {
-  return (
-    <div>
-      <h2>Players List:</h2>
-      <ul className="w-full">
-        {players.map((player, index) => (
-          <li
+
+function SinglePlayer({index, player,deletePlayer}){
+  return(
+  <li
             className="flex flex-row h-12 w-full justify-between items-start py-0 my-2 border border-stone-700 rounded-md border-opacity-40"
             key={index}
           >
@@ -22,7 +19,16 @@ function PlayersList({ players, deletePlayer }) {
             >
               X
             </button>
-          </li>
+          </li>)
+}
+
+function PlayersList({ players, deletePlayer }) {
+  return (
+    <div>
+      <h2>Players List:</h2>
+      <ul className="w-full">
+        {players.map((player, index) => (
+       <SinglePlayer index={index}  player={player} deletePlayer={deletePlayer} />
         ))}
       </ul>
     </div>
