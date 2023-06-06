@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PlayerNameFromInput from "./PlayerNameFromInput";
 import PlayersList from "./PlayersList";
 import TeamGenerator from "../TeamGenerator/TeamGenerator";
+import NumberTeamsOrPlayers from "../TeamGenerator/NumberTeamsOrPlayers"
 
 function PlayerCreatorContainer() {
   const [players, setPlayers] = useState([]);
@@ -25,6 +26,8 @@ function PlayerCreatorContainer() {
     players.splice(index, 1);
     setPlayers([...players]);
   }
+
+
 
   return (
     <div>

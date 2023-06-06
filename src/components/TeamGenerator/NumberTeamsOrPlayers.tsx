@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 
+function TeamsDivisionMethod({ isTeamsActive, text, handleUserChoice, color1, color2 }) {
+  return (
+    <button
+      className={`${isTeamsActive ? color1: color2} flex-1`}
+      onClick={() => handleUserChoice()}
+    >
+      {text}
+    </button>
+  );
+}
+
 function NumberChangeBtn({ addCounter, sign, radius }) {
   return (
     <button
@@ -11,17 +22,11 @@ function NumberChangeBtn({ addCounter, sign, radius }) {
   );
 }
 
-
-function TeamsDivisionMethod({ isTeamsActive, text, handleUserChoice, color1, color2 }) {
-  return (
-    <button
-      className={`${isTeamsActive ? color1: color2} flex-1`}
-      onClick={() => handleUserChoice()}
-    >
-      {text}
-    </button>
-  );
-}
+function DrawBtn(){
+  return(
+    <button className="w-full h-12 bg-orange-400">
+      Draw teams</button>
+  )}
 
 const NumberTeamsOrPlayers = () => {
   const [isTeamsActive, setIsTeamsActive] = useState(true);
@@ -55,6 +60,7 @@ const NumberTeamsOrPlayers = () => {
         </div>
        <NumberChangeBtn addCounter={addCounter} sign="+" radius="rounded-r-md"/>
       </div>
+      <DrawBtn />
     </>
   );
 };
