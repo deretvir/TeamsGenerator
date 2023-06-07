@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PlayerNameFromInput from "./PlayerNameFromInput";
 import PlayersList from "./PlayersList";
-import TeamGenerator from "../TeamGenerator/TeamGenerator";
 import Teams from "../TeamGenerator/Teams";
 
 function PlayerCreatorContainer() {
@@ -35,7 +34,10 @@ function PlayerCreatorContainer() {
           Error: the name is already used
         </p>
       )}
-      <PlayersList players={players} deletePlayer={deletePlayer} />
+       <PlayersList players={players} deletePlayer={deletePlayer} />
+        <Teams players={players} />
+    
+     
    
 
     </div>

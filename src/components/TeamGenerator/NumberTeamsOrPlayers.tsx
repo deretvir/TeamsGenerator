@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+
 
 function TeamsDivisionMethod({ isTeamsActive, text, handleUserChoice, color1, color2 }) {
   return (
@@ -10,7 +11,6 @@ function TeamsDivisionMethod({ isTeamsActive, text, handleUserChoice, color1, co
     </button>
   );
 }
-
 function NumberChangeBtn({ addCounter, sign, radius }) {
   return (
     <button
@@ -22,6 +22,7 @@ function NumberChangeBtn({ addCounter, sign, radius }) {
   );
 }
 
+
 function DrawBtn({ onClick }) {
   return (
     <button className="w-full h-12 bg-orange-400" onClick={onClick}>
@@ -31,7 +32,9 @@ function DrawBtn({ onClick }) {
 }
 
 
-const NumberTeamsOrPlayers = ({players, setNumberOfTeams}) => {
+
+
+function NumberTeamsOrPlayers({ players, setNumberOfTeams }) {
   const [isTeamsActive, setIsTeamsActive] = useState(true);
   const [counter, setCounter] = useState(2);
 
@@ -48,36 +51,46 @@ const NumberTeamsOrPlayers = ({players, setNumberOfTeams}) => {
     if (counter < 3) return;
     setCounter(counter - 1);
   }
-  
- function calculateHowManyTeams({ players, isTeamsActive, counter }) {
-  if (isTeamsActive && players.length % counter === 0) {
-    setNumberOfTeams(counter);
-  } else if (!isTeamsActive && players.length % counter === 0) {
-    setNumberOfTeams(players.length / counter);
-  } else {
-    console.log("wrong input");
-  }
-}
 
+  function calculateHowManyTeams({ players, isTeamsActive, counter }) {
+    if (isTeamsActive && players.length % counter === 0) {
+      setNumberOfTeams(counter);
+    } else if (!isTeamsActive && players.length % counter === 0) {
+      setNumberOfTeams(players.length / counter);
+    } else {
+      console.log("wrong input");
+    }
+  }
 
   return (
     <>
       <div className="flex justify-between items-center m-0">
-       <TeamsDivisionMethod isTeamsActive={isTeamsActive} text="number of teams" color1="bg-orange-400" color2="bg-gray-500" handleUserChoice={() => handleUserChoice(true)}/>
-       <TeamsDivisionMethod isTeamsActive={isTeamsActive} text="number players in team" color1="bg-gray-500" color2="bg-orange-400" handleUserChoice={() => handleUserChoice(false)} />
+        <TeamsDivisionMethod
+          isTeamsActive={isTeamsActive}
+          text="number of teams"
+          color1="bg-orange-400"
+          color2="bg-gray-500"
+          handleUserChoice={() => handleUserChoice(true)}
+        />
+        <TeamsDivisionMethod
+          isTeamsActive={isTeamsActive}
+          text="number players in team"
+          color1="bg-gray-500"
+          color2="bg-orange-400"
+          handleUserChoice={() => handleUserChoice(false)}
+        />
       </div>
-      
+
       <div className="flex flex-row h-12 w-full justify-between items-start py-0 m-0 border border-stone-700 rounded-md border-opacity-40">
-     <NumberChangeBtn addCounter={minusCounter} sign="-" radius="rounded-l-md"/>
-        <div className="bg-stone-[rgb(128, 128, 129)]] h-full  w-full flex justify-center items-center px-8">
+        <NumberChangeBtn addCounter={minusCounter} sign="-" radius="rounded-l-md" />
+        <div className="bg-stone-[rgb(128, 128, 129)] h-full w-full flex justify-center items-center px-8">
           {counter}
         </div>
-       <NumberChangeBtn addCounter={addCounter} sign="+" radius="rounded-r-md"/>
+        <NumberChangeBtn addCounter={addCounter} sign="+" radius="rounded-r-md" />
       </div>
-       <DrawBtn onClick={() => calculateHowManyTeams({ players, isTeamsActive, counter })} />
-
+      <DrawBtn onClick={() => calculateHowManyTeams({ players, isTeamsActive, counter })} />
     </>
   );
-};
+}
 
 export default NumberTeamsOrPlayers;
