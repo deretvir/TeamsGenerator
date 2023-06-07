@@ -22,15 +22,18 @@ function NumberChangeBtn({ addCounter, sign, radius }) {
   );
 }
 
-function DrawBtn(){
-  return(
-    <button className="w-full h-12 bg-orange-400">
-      Draw teams</button>
-  )}
+function DrawBtn({ onClick }) {
+  return (
+    <button className="w-full h-12 bg-orange-400" onClick={onClick}>
+      Draw teams
+    </button>
+  );
+}
 
-const NumberTeamsOrPlayers = () => {
+
+const NumberTeamsOrPlayers = ({players, setNumberOfTeams}) => {
   const [isTeamsActive, setIsTeamsActive] = useState(true);
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(2);
 
   function handleUserChoice(isTrue) {
     if (!isTrue) setIsTeamsActive(false);
@@ -42,9 +45,20 @@ const NumberTeamsOrPlayers = () => {
   }
 
   function minusCounter() {
-    if (counter < 2) return;
+    if (counter < 3) return;
     setCounter(counter - 1);
   }
+  
+ function calculateHowManyTeams({ players, isTeamsActive, counter }) {
+  if (isTeamsActive && players.length % counter === 0) {
+    setNumberOfTeams(counter);
+  } else if (!isTeamsActive && players.length % counter === 0) {
+    setNumberOfTeams(players.length / counter);
+  } else {
+    console.log("wrong input");
+  }
+}
+
 
   return (
     <>
@@ -60,7 +74,8 @@ const NumberTeamsOrPlayers = () => {
         </div>
        <NumberChangeBtn addCounter={addCounter} sign="+" radius="rounded-r-md"/>
       </div>
-      <DrawBtn />
+       <DrawBtn onClick={() => calculateHowManyTeams({ players, isTeamsActive, counter })} />
+
     </>
   );
 };

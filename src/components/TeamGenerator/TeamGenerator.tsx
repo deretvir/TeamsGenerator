@@ -1,9 +1,17 @@
 import React from "react";
 import NumberTeamsOrPlayers from "./NumberTeamsOrPlayers";
-const TeamGenerator = ({ players }) => {
+
+
+
+
+
+const TeamGenerator = ({ players, numberOfTeams }) => {
+  const [teams, setTeams]= useState(new Map());
+  
+  
   return (
     <>
-      <NumberTeamsOrPlayers />
+ 
     </>
   );
 };

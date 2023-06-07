@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import PlayerNameFromInput from "./PlayerNameFromInput";
 import PlayersList from "./PlayersList";
 import TeamGenerator from "../TeamGenerator/TeamGenerator";
-import NumberTeamsOrPlayers from "../TeamGenerator/NumberTeamsOrPlayers"
+import Teams from "../TeamGenerator/Teams";
 
 function PlayerCreatorContainer() {
   const [players, setPlayers] = useState([]);
   const [isNameUsedError, setIsNameUsedError] = useState(false);
-  const [numberTeams, setNumberTeams] = useState(2);
-  const [numberPlayers, setNumberPlayers] = useState(1);
-
+ 
   const addPlayer = (playerName) => {
     if (playerName.trim() !== "") {
       if ([...players].includes(playerName)) {
@@ -38,7 +36,8 @@ function PlayerCreatorContainer() {
         </p>
       )}
       <PlayersList players={players} deletePlayer={deletePlayer} />
-      <TeamGenerator players={players} />
+   
+
     </div>
   );
 }
