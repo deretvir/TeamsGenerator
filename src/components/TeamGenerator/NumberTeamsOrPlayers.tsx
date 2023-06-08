@@ -20,10 +20,10 @@ const NumberTeamsOrPlayers = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center m-0">
+      <div className="flex justify-between items-center m-0 mt-10">
         <button
           className={` ${
-            isTeamsActive ? "bg-orange-400" : "bg-gray-500"
+            isTeamsActive ? "bg-orange-400" : "bg-gray-500 blur-[0.7px]"
           } flex-1`}
           onClick={() => handleUserChoice(true)}
         >
@@ -31,7 +31,7 @@ const NumberTeamsOrPlayers = () => {
         </button>
         <button
           className={`${
-            isTeamsActive ? "bg-gray-500" : "bg-orange-400"
+            isTeamsActive ? "bg-gray-500 blur-[0.7px]" : "bg-orange-400"
           } flex-1`}
           onClick={() => handleUserChoice(false)}
         >
@@ -40,12 +40,12 @@ const NumberTeamsOrPlayers = () => {
       </div>
 
       <div className="flex flex-row h-12 w-full justify-between items-start py-0 m-0 border border-stone-700 rounded-md border-opacity-40">
-        <div
+        <button
           className="w-14 h-full bg-orange-400 rounded-l-md flex justify-center items-center font-bold text-white"
           onClick={minusCounter}
         >
           -
-        </div>
+        </button>
         <div className="bg-stone-[rgb(128, 128, 129)]] h-full  w-full flex justify-center items-center px-8">
           {counter}
         </div>
@@ -56,6 +56,9 @@ const NumberTeamsOrPlayers = () => {
           +
         </button>
       </div>
+      <button className="bg-orange-400 w-full h-12 flex justify-center items-center">
+        Draw teams
+      </button>
     </>
   );
 };
