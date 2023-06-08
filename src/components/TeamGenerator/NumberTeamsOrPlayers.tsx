@@ -41,6 +41,7 @@ function calculateHowManyTeams({
   counter,
   setIsErrorNumberOfTeams,
   setNumberOfTeams,
+  handleTeams,
 }) {
   if (players.length < 4) {
     setIsErrorNumberOfTeams(true);
@@ -54,13 +55,17 @@ function calculateHowManyTeams({
   const isError = players.length % counter !== 0;
   console.log(isError);
   setIsErrorNumberOfTeams(isError);
-  if (!isError) setNumberOfTeams(calculatedNumberOfTeams);
+  if (!isError) {
+    setNumberOfTeams(calculatedNumberOfTeams);
+    handleTeams();
+  }
 }
 
 function NumberTeamsOrPlayers({
   players,
   setNumberOfTeams,
   setIsErrorNumberOfTeams,
+  handleTeams,
 }) {
   const [isTeamsActive, setIsTeamsActive] = useState(true);
   const [counter, setCounter] = useState(2);
@@ -120,6 +125,7 @@ function NumberTeamsOrPlayers({
             counter,
             setNumberOfTeams,
             setIsErrorNumberOfTeams,
+            handleTeams,
           })
         }
       />
