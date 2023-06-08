@@ -42,12 +42,17 @@ function calculateHowManyTeams({
   setIsErrorNumberOfTeams,
   setNumberOfTeams,
 }) {
-  if (players.length < 4) return;
+  if (players.length < 4) {
+    setIsErrorNumberOfTeams(true);
+    console.log("dsa");
+    return;
+  }
   console.log("ok");
-  let calculatedNumberOfTeams = isTeamsActive
+  const calculatedNumberOfTeams = isTeamsActive
     ? counter
     : players.length / counter;
-  let isError = players.length % counter !== 0;
+  const isError = players.length % counter !== 0;
+  console.log(isError);
   setIsErrorNumberOfTeams(isError);
   if (!isError) setNumberOfTeams(calculatedNumberOfTeams);
 }

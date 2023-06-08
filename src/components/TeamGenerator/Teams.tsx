@@ -13,7 +13,11 @@ function Teams({ players }) {
         setNumberOfTeams={setNumberOfTeams}
         setIsErrorNumberOfTeams={setIsErrorNumberOfTeams}
       />
-      {isErrorNumberOfTeams && <p className="text-red ">wrong input</p>}
+      {isErrorNumberOfTeams && (
+        <p className=" text-red-700 font-bold capitalize text-lg ">
+          wrong input!
+        </p>
+      )}
     </div>
   );
 }
