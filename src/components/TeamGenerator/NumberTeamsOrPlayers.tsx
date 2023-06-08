@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-
-function TeamsDivisionMethod({ isTeamsActive, text, handleUserChoice, color1, color2 }) {
+function TeamsDivisionMethod({
+  isTeamsActive,
+  text,
+  handleUserChoice,
+  color1,
+  color2,
+}) {
   return (
     <button
-      className={`${isTeamsActive ? color1: color2} flex-1`}
+      className={`${isTeamsActive ? color1 : color2} flex-1`}
       onClick={() => handleUserChoice()}
     >
       {text}
@@ -22,7 +27,6 @@ function NumberChangeBtn({ addCounter, sign, radius }) {
   );
 }
 
-
 function DrawBtn({ onClick }) {
   return (
     <button className="w-full h-12 bg-orange-400" onClick={onClick}>
@@ -31,16 +35,33 @@ function DrawBtn({ onClick }) {
   );
 }
 
+function calculateHowManyTeams({
+  players,
+  isTeamsActive,
+  counter,
+  setIsErrorNumberOfTeams,
+  setNumberOfTeams,
+}) {
+  if (players.length < 4) return;
+  console.log("ok");
+  let calculatedNumberOfTeams = isTeamsActive
+    ? counter
+    : players.length / counter;
+  let isError = players.length % counter !== 0;
+  setIsErrorNumberOfTeams(isError);
+  if (!isError) setNumberOfTeams(calculatedNumberOfTeams);
+}
 
-
-
-function NumberTeamsOrPlayers({ players, setNumberOfTeams }) {
+function NumberTeamsOrPlayers({
+  players,
+  setNumberOfTeams,
+  setIsErrorNumberOfTeams,
+}) {
   const [isTeamsActive, setIsTeamsActive] = useState(true);
   const [counter, setCounter] = useState(2);
 
   function handleUserChoice(isTrue) {
-    if (!isTrue) setIsTeamsActive(false);
-    else setIsTeamsActive(true);
+    setIsTeamsActive(isTrue);
   }
 
   function addCounter() {
@@ -50,16 +71,6 @@ function NumberTeamsOrPlayers({ players, setNumberOfTeams }) {
   function minusCounter() {
     if (counter < 3) return;
     setCounter(counter - 1);
-  }
-
-  function calculateHowManyTeams({ players, isTeamsActive, counter }) {
-    if (isTeamsActive && players.length % counter === 0) {
-      setNumberOfTeams(counter);
-    } else if (!isTeamsActive && players.length % counter === 0) {
-      setNumberOfTeams(players.length / counter);
-    } else {
-      console.log("wrong input");
-    }
   }
 
   return (
@@ -82,13 +93,35 @@ function NumberTeamsOrPlayers({ players, setNumberOfTeams }) {
       </div>
 
       <div className="flex flex-row h-12 w-full justify-between items-start py-0 m-0 border border-stone-700 rounded-md border-opacity-40">
-        <NumberChangeBtn addCounter={minusCounter} sign="-" radius="rounded-l-md" />
+        <NumberChangeBtn
+          addCounter={minusCounter}
+          sign="-"
+          radius="rounded-l-md"
+        />
         <div className="bg-stone-[rgb(128, 128, 129)] h-full w-full flex justify-center items-center px-8">
           {counter}
         </div>
-        <NumberChangeBtn addCounter={addCounter} sign="+" radius="rounded-r-md" />
+        <NumberChangeBtn
+          addCounter={addCounter}
+          sign="+"
+          radius="rounded-r-md"
+        />
       </div>
-      <DrawBtn onClick={() => calculateHowManyTeams({ players, isTeamsActive, counter })} />
+      <DrawBtn
+        onClick={() =>
+          calculateHowManyTeams({
+            players,
+            isTeamsActive,
+            counter,
+            setNumberOfTeams,
+            setIsErrorNumberOfTeams,
+          })
+        }
+      />
+      <p className="text-left text-white">
+        The minimum number of people in a team is two. All teams must contain
+        the same number of players
+      </p>
     </>
   );
 }
