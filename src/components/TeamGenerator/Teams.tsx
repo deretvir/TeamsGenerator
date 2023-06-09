@@ -30,7 +30,7 @@ function Teams({ players }) {
 
       map.set(`team${i}`, teamPlayers);
     }
-
+    console.log(map);
     setTeams(map);
   };
 
