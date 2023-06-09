@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import NumberTeamsOrPlayers from "./NumberTeamsOrPlayers";
 import TeamGenerator from "./TeamGenerator";
+import {Team} from "../Team/Team";
 
 function Teams({ players }) {
   // const [numberOfTeams, setNumberOfTeams] = useState(2);
   const [teams, setTeams] = useState(new Map());
+  //lepiej tak
+  //const [teams, setTeams] = useState([]);
+  //a jeszcze lepiej tak
+  // const [teams, setTeams] = useState<Team[]>([]);
+  //i potem jak chcesz lecieć po teamach to robisz: teams.map((team, index) => {
+  // return <Team team={team}/> //(to sobie musisz dorobić)
+  // })
+
   const [isErrorNumberOfTeams, setIsErrorNumberOfTeams] = useState(false);
 
   const handleTeams = (numberOfTeams) => {

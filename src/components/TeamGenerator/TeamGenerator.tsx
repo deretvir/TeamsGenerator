@@ -14,7 +14,7 @@ function TeamSinglePlayer({ player, index, team }) {
         <img
           className="w-12 h-12 pr-4 "
           src={`https://api.dicebear.com/6.x/pixel-art/svg?seed=${player}`}
-        ></img>
+        />
         <p className="text-white"> {player}</p>
       </div>
     </li>
