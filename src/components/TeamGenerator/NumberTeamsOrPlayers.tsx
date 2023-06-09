@@ -43,12 +43,13 @@ function calculateHowManyTeams({
   setNumberOfTeams,
   handleTeams,
 }) {
+  
   if (players.length < 4) {
     setIsErrorNumberOfTeams(true);
-    console.log("dsa");
+    
     return;
   }
-  console.log("ok");
+  
   const calculatedNumberOfTeams = isTeamsActive
     ? counter
     : players.length / counter;
@@ -57,6 +58,7 @@ function calculateHowManyTeams({
   setIsErrorNumberOfTeams(isError);
   if (!isError) {
     setNumberOfTeams(calculatedNumberOfTeams);
+    console.log('powinno odpalioc')
     handleTeams();
   }
 }

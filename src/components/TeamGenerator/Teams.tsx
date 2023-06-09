@@ -8,8 +8,10 @@ function Teams({ players }) {
   const [isErrorNumberOfTeams, setIsErrorNumberOfTeams] = useState(false);
 
   const handleTeams = () => {
+    console.log("handleTeams")
     const randomPlayers = [];
     const map = new Map();
+    
     while (randomPlayers.length !== players.length) {
       const randomNumber = Math.floor(Math.random() * players.length);
       if (!randomPlayers.includes(players[randomNumber])) {
@@ -30,7 +32,7 @@ function Teams({ players }) {
 
       map.set(`team${i}`, teamPlayers);
     }
-
+    console.log(map)
     setTeams(map);
   };
 
@@ -49,11 +51,7 @@ function Teams({ players }) {
           </p>
         )}
       </div>
-      <TeamGenerator
-        players={players}
-        numberOfTeams={numberOfTeams}
-        setTeams={setTeams}
-      />
+   <TeamGenerator teams={teams} />
     </>
   );
 }
