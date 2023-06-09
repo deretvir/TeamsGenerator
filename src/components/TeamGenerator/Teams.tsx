@@ -1,47 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NumberTeamsOrPlayers from "./NumberTeamsOrPlayers";
 import TeamGenerator from "./TeamGenerator";
 
 function Teams({ players }) {
-  const [numberOfTeams, setNumberOfTeams] = useState(2);
+ // const [numberOfTeams, setNumberOfTeams] = useState(2);
   const [teams, setTeams] = useState(new Map());
   const [isErrorNumberOfTeams, setIsErrorNumberOfTeams] = useState(false);
 
-  const handleTeams = () => {
-    console.log("handleTeams")
-    const randomPlayers = [];
-    const map = new Map();
-    
-    while (randomPlayers.length !== players.length) {
-      const randomNumber = Math.floor(Math.random() * players.length);
-      if (!randomPlayers.includes(players[randomNumber])) {
-        randomPlayers.push(players[randomNumber]);
-      }
+ const handleTeams = (numberOfTeams) => {
+  const randomPlayers = [];
+  const map = new Map();
+  
+  console.log('Team compontent: number of teams  - ',numberOfTeams);
+
+  while (randomPlayers.length !== players.length) {
+    const randomNumber = Math.floor(Math.random() * players.length);
+    if (!randomPlayers.includes(players[randomNumber])) {
+      randomPlayers.push(players[randomNumber]);
+    }
+  }
+
+  const playersPerTeam = players.length / numberOfTeams;
+  let playerIndex = 0;
+
+  for (let i = 0; i < numberOfTeams; i++) {
+    const teamPlayers = [];
+
+    for (let j = 0; j < playersPerTeam; j++) {
+      teamPlayers.push(randomPlayers[playerIndex]);
+      playerIndex++;
     }
 
-    const playersPerTeam = players.length / numberOfTeams;
-    let playerIndex = 0;
+    map.set(`team${i}`, teamPlayers);
+  }
 
-    for (let i = 0; i < numberOfTeams; i++) {
-      const teamPlayers = [];
+  setTeams(map); // Use functional form of setTeams
 
-      for (let j = 0; j < playersPerTeam; j++) {
-        teamPlayers.push(randomPlayers[playerIndex]);
-        playerIndex++;
-      }
-
-      map.set(`team${i}`, teamPlayers);
-    }
-    console.log(map)
-    setTeams(map);
-  };
+  // Optional: You can also log the updated teams here to verify
+  console.log(map);
+};
 
   return (
     <>
       <div>
         <NumberTeamsOrPlayers
           players={players}
-          setNumberOfTeams={setNumberOfTeams}
+         
           setIsErrorNumberOfTeams={setIsErrorNumberOfTeams}
           handleTeams={handleTeams}
         />
@@ -51,7 +55,7 @@ function Teams({ players }) {
           </p>
         )}
       </div>
-   <TeamGenerator teams={teams} />
+      <TeamGenerator teams={teams} />
     </>
   );
 }
