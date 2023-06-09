@@ -24,10 +24,13 @@ function TeamSinglePlayer({ player, index, team }) {
 const TeamGenerator = ({ teams }) => {
   return (
     <>
+      {teams.size !== 0 && (
+        <h2 className="text-white text-2xl font-bold">Teams</h2>
+      )}
       <div>
         {[...teams].map(([team, members]) => (
           <div key={team}>
-            <p className="text-left">{team}</p>
+            <p className="text-left text-white text-xl">{team}</p>
             {members.map((player, index) => (
               <TeamSinglePlayer
                 player={player}

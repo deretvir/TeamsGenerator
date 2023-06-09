@@ -67,7 +67,7 @@ function PlayerNameFromInput({ addPlayer }: PlayerNameFromInputProps) {
         <InputBtn displayName={displayName} />
       </div>
       <p className="text-l text-white">
-        Press "Enter" to add a player or press the button
+        Press "Enter" to add a player or click the button
       </p>
     </div>
   );

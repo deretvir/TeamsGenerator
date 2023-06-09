@@ -31,7 +31,7 @@ function Teams({ players }) {
         playerIndex++;
       }
 
-      map.set(`team${i}`, teamPlayers);
+      map.set(`Team ${i + 1}`, teamPlayers);
     }
 
     setTeams(map);
@@ -51,6 +51,7 @@ function Teams({ players }) {
           </p>
         )}
       </div>
+
       <TeamGenerator teams={teams} />
     </>
   );

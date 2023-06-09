@@ -42,26 +42,24 @@ function calculateHowManyTeams({
   setIsErrorNumberOfTeams,
   handleTeams,
 }) {
-  console.log(players)
+  console.log(players);
   if (players.length < 4) {
     setIsErrorNumberOfTeams(true);
     return;
   }
-  
-  const numberOfTeams = isTeamsActive
-    ? counter
-    : players.length / counter;
+
+  const numberOfTeams = isTeamsActive ? counter : players.length / counter;
   const isError = players.length % counter !== 0;
   console.log(isError);
   setIsErrorNumberOfTeams(isError);
   if (!isError) {
-  //setNumberOfTeams(calculatedNumberOfTeams)
-  //dlaczego tutja musze bezposrednio do funckji dawac argument numberOfTeams
-  // gdy robilem setNumberOfTeams(calculatedNumberOfTeams), a nastepnie
-  //w komponencie Teams dawalem jako arguemnt kompoentu TeamGenerator NumberOfTeams, to dzialalo to z opoznieiniem
-  // dlaczego?
-   handleTeams(numberOfTeams);
-    console.log('number of teams',numberOfTeams)
+    //setNumberOfTeams(calculatedNumberOfTeams)
+    //dlaczego tutja musze bezposrednio do funckji dawac argument numberOfTeams
+    // gdy robilem setNumberOfTeams(calculatedNumberOfTeams), a nastepnie
+    //w komponencie Teams dawalem jako arguemnt kompoentu TeamGenerator NumberOfTeams, to dzialalo to z opoznieiniem
+    // dlaczego?
+    handleTeams(numberOfTeams);
+    console.log("number of teams", numberOfTeams);
   }
 }
 
@@ -133,7 +131,7 @@ function NumberTeamsOrPlayers({
         }
       />
       <p className="text-left text-white">
-        The minimum number of people in a team is two. All teams must contain
+        The minimum number of players on a team is two. All teams must contain
         the same number of players
       </p>
     </>

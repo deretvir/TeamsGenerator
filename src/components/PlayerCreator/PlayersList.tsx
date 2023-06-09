@@ -27,7 +27,11 @@ function SinglePlayer({ index, player, deletePlayer }) {
 function PlayersList({ players, deletePlayer }) {
   return (
     <div>
-      <h2>Players List:</h2>
+      {players.length === 0 ? (
+        <h2 className="text-white text-2xl font-bold">No players</h2>
+      ) : (
+        <h2 className="text-white text-2xl font-bold">Players List</h2>
+      )}
       <ul className="w-full">
         {players.map((player, index) => (
           <SinglePlayer
