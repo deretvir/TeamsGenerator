@@ -40,24 +40,28 @@ function calculateHowManyTeams({
   isTeamsActive,
   counter,
   setIsErrorNumberOfTeams,
-  setNumberOfTeams,
   handleTeams,
 }) {
+  console.log(players)
   if (players.length < 4) {
     setIsErrorNumberOfTeams(true);
-    console.log("dsa");
     return;
   }
-  console.log("ok");
-  const calculatedNumberOfTeams = isTeamsActive
+  
+  const numberOfTeams = isTeamsActive
     ? counter
     : players.length / counter;
   const isError = players.length % counter !== 0;
   console.log(isError);
   setIsErrorNumberOfTeams(isError);
   if (!isError) {
-    setNumberOfTeams(calculatedNumberOfTeams);
-    handleTeams();
+  //setNumberOfTeams(calculatedNumberOfTeams)
+  //dlaczego tutja musze bezposrednio do funckji dawac argument numberOfTeams
+  // gdy robilem setNumberOfTeams(calculatedNumberOfTeams), a nastepnie
+  //w komponencie Teams dawalem jako arguemnt kompoentu TeamGenerator NumberOfTeams, to dzialalo to z opoznieiniem
+  // dlaczego?
+   handleTeams(numberOfTeams);
+    console.log('number of teams',numberOfTeams)
   }
 }
 
@@ -123,7 +127,6 @@ function NumberTeamsOrPlayers({
             players,
             isTeamsActive,
             counter,
-            setNumberOfTeams,
             setIsErrorNumberOfTeams,
             handleTeams,
           })

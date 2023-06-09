@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NumberTeamsOrPlayers from "./NumberTeamsOrPlayers";
 import TeamGenerator from "./TeamGenerator";
 
 function Teams({ players }) {
-  const [numberOfTeams, setNumberOfTeams] = useState(2);
+  // const [numberOfTeams, setNumberOfTeams] = useState(2);
   const [teams, setTeams] = useState(new Map());
   const [isErrorNumberOfTeams, setIsErrorNumberOfTeams] = useState(false);
 
-  const handleTeams = () => {
+  const handleTeams = (numberOfTeams) => {
     const randomPlayers = [];
     const map = new Map();
+
+    console.log("Team compontent: number of teams  - ", numberOfTeams);
+
     while (randomPlayers.length !== players.length) {
       const randomNumber = Math.floor(Math.random() * players.length);
       if (!randomPlayers.includes(players[randomNumber])) {
@@ -30,7 +33,7 @@ function Teams({ players }) {
 
       map.set(`team${i}`, teamPlayers);
     }
-    console.log(map);
+
     setTeams(map);
   };
 
@@ -39,7 +42,6 @@ function Teams({ players }) {
       <div>
         <NumberTeamsOrPlayers
           players={players}
-          setNumberOfTeams={setNumberOfTeams}
           setIsErrorNumberOfTeams={setIsErrorNumberOfTeams}
           handleTeams={handleTeams}
         />
@@ -49,11 +51,7 @@ function Teams({ players }) {
           </p>
         )}
       </div>
-      <TeamGenerator
-        players={players}
-        numberOfTeams={numberOfTeams}
-        setTeams={setTeams}
-      />
+      <TeamGenerator teams={teams} />
     </>
   );
 }
