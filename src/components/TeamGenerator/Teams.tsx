@@ -11,8 +11,6 @@ function Teams({ players }) {
     const randomPlayers = [];
     const map = new Map();
 
-    console.log("Team compontent: number of teams  - ", numberOfTeams);
-
     while (randomPlayers.length !== players.length) {
       const randomNumber = Math.floor(Math.random() * players.length);
       if (!randomPlayers.includes(players[randomNumber])) {
