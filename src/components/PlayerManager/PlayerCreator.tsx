@@ -1,54 +1,49 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, {ChangeEvent, KeyboardEvent, useRef, useState} from "react";
+import {Player} from "../Player/Player";
 
-const PlayerCreator = ({ addPlayer, deletePlayer }) => {
-  const [name, setName] = useState("");
-  const inputRef = useRef(null);
+type PlayerCreatorProps = {
+    onPlayer: (player: Player) => void
+}
 
-  interface Player {
-    name: string;
-    id: number;
-    avatar: string;
-    deletePlayer: (name: string) => void;
-  }
+const PlayerCreator = ({onPlayer}: PlayerCreatorProps) => {
+    const [name, setName] = useState("");
+    const inputRef = useRef(null);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
-  function handleEnterKeyDown(event: KeyboardEvent<HTMLInputElement>): void {
-    if (event.key === "Enter") handleCreatPlayer();
-  }
-
-  function handleNameChange(event: ChangeEvent<HTMLInputElement>): void {
-    setName(event.target.value);
-  }
-
-  function handleCreatPlayer(): void {
-    if (name) {
-      const player: Player = {
-        name: name,
-        id: Math.random(),
-        avatar: `https://api.dicebear.com/6.x/pixel-art/svg?seed=${name}`,
-        deletePlayer: deletePlayer,
-        //player.deletePlayer(index); gdy bede chcial usunac
-      };
-      addPlayer(player);
-      inputRef.current.focus();
-      setName("");
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        setName(event.target.value);
     }
-  }
 
-  return (
-    <div>
-      <input
-        type="text"
-        value={name}
-        onChange={handleNameChange}
-        ref={inputRef}
-        onKeyDown={handleEnterKeyDown}
-      />
-      <button onClick={handleCreatPlayer}> +</button>
-    </div>
-  );
+    const handleEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+        if (event.key === "Enter") handleCreatePlayer();
+    }
+
+    const handleCreatePlayer = (): void => {
+        if(name === ""){
+            return;
+        }
+
+        const player: Player = {
+            name: name,
+            avatar: `https://api.dicebear.com/6.x/pixel-art/svg?seed=${name}`,
+        };
+
+        inputRef.current.focus();
+        setName("");
+
+        onPlayer(player);
+    }
+
+    return (
+        <div>
+            <input
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+                ref={inputRef}
+                onKeyDown={handleEnterKeyDown}
+            />
+            <button onClick={handleCreatePlayer}>+</button>
+        </div>
+    );
 };
-export { PlayerCreator };
+export {PlayerCreator};
