@@ -1,19 +1,25 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, createContext, useContext} from "react";
 import {PlayerCreator} from "./PlayerCreator";
 import {Player} from "../Player/Player";
-import PlayersList from "../PlayerCreator/PlayersList";
+//import PlayersList from "../PlayerCreator/PlayersList";
 
 //stworzyć context https://blog.logrocket.com/how-to-use-react-context-typescript/
 
+export const PlayerManagerContext = createContext(null)
+
+
 const PlayerManager = () => {
     const [players, setPlayers] = useState([]);
+    //czy tu trzeba definiowac players jako useState? nie wystarczy zmienna?
 
     const addPlayer = (player: Player) => {
+        const isPlayerExistInPlayers = players.some(obj=> obj.name===player.name);
+       if(isPlayerExistInPlayers) return;
         setPlayers([...players, player]);
     };
 
     const deletePlayer = (player: Player) => {
-        // znajdz index playera po name jeżeli jest unikalne :)
+      //  players.indexOf(player.name)
 
 
         // players.splice(index, 1);
@@ -21,14 +27,13 @@ const PlayerManager = () => {
     }
 
     return (
-        // <PlayerManagerContext.Provider value={{players, addPlayer, deletePlayer}}>
+        <PlayerManagerContext.Provider value={{addPlayer}}>
             <div>
                 <h1>Player Manager</h1>
-                <PlayerCreator onPlayer={addPlayer}/>
-
-                <PlayersList players={players} onDeletePlayer={deletePlayer}/>
+                <PlayerCreator />
             </div>
-        // </PlayerManagerContext.Provider>
+            </PlayerManagerContext.Provider>
+      
     );
 };
 
