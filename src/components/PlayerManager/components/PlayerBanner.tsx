@@ -12,7 +12,7 @@ const PlayerBanner = ({ player, index, deletePlayer }: PlayerBannerProps) => {
       className="flex flex-row h-12 w-full justify-between items-start py-0 my-2 border border-stone-700 rounded-md border-opacity-40"
       key={player.name}
     >
-      {index !== null && (
+      {index !== undefined && (
         <div className="w-12 h-full bg-orange-400 rounded-l-md flex justify-center items-center font-bold text-white">
           <span>{index + 1}</span>
         </div>

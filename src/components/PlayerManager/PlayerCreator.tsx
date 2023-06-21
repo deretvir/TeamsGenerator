@@ -9,15 +9,13 @@ import { Player } from "../Player/Player";
 import { PlayerManagerContext } from "./PlayerManager";
 import { PlayerCreatorButton } from "./components/PlayerCreatorButton";
 import { PlayerCreatorInput } from "./components/PlayerCreatorInput";
-
-type PlayerCreatorProps = {
-  addPlayer: (player: Player) => void;
-};
+import { PlayerManagerContextType } from "./PlayerManager";
 
 const PlayerCreator = () => {
   const [name, setName] = useState("");
-  const inputRef = useRef(null);
-  const { addPlayer } = useContext<PlayerCreatorProps>(PlayerManagerContext);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { addPlayer } =
+    useContext<PlayerManagerContextType>(PlayerManagerContext);
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value);
@@ -50,9 +48,7 @@ const PlayerCreator = () => {
         inputRef={inputRef}
         handleEnterKeyDown={handleEnterKeyDown}
       />
-      <PlayerCreatorButton handleCreatePlayer={handleCreatePlayer}>
-        +
-      </PlayerCreatorButton>
+      <PlayerCreatorButton handleCreatePlayer={handleCreatePlayer} />
     </div>
   );
 };

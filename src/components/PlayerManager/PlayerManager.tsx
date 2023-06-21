@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
+import React, { useState, createContext } from "react";
 import { PlayerCreator } from "./PlayerCreator";
 import { Player } from "../Player/Player";
 import { PlayerList } from "./PlayerList";
@@ -6,12 +6,19 @@ import { PlayerList } from "./PlayerList";
 
 //stworzyć context https://blog.logrocket.com/how-to-use-react-context-typescript/
 
-export const PlayerManagerContext = createContext(null);
+export type PlayerManagerContextType = {
+  addPlayer: (player: Player) => void;
+  deletePlayer: (player: Player) => void;
+  players: Player[];
+};
 
-const PlayerManager = () => {
-  const [players, setPlayers] = useState([]);
+export const PlayerManagerContext = createContext<PlayerManagerContextType>(
+  {} as PlayerManagerContextType
+);
+
+function PlayerManager() {
+  const [players, setPlayers] = useState<Player[]>([]);
   //czy tu trzeba definiowac players jako useState? nie wystarczy zmienna?
-
   const addPlayer = (player: Player) => {
     const isPlayerExistInPlayers = players.some(
       (obj) => obj.name === player.name
@@ -23,8 +30,8 @@ const PlayerManager = () => {
 
   const deletePlayer = (player: Player) => {
     const indexToDelete = players.findIndex((obj) => obj.name === player.name);
-    players.splice(indexToDelete, 1);
-    setPlayers([...players]);
+    const updatedPlayers = players.slice().splice(indexToDelete, 1);
+    setPlayers(updatedPlayers);
   };
 
   return (
@@ -36,6 +43,6 @@ const PlayerManager = () => {
       </div>
     </PlayerManagerContext.Provider>
   );
-};
+}
 
 export default PlayerManager;

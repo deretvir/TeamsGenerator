@@ -4,20 +4,19 @@
 //pytania
 //1. Czy jezeli mam zdefiniowany context, jest sens dawac jako props zmienne z contextu do elementu? Patrz props do PlayerBanner
 //2. Czy moze od razu w PlayerBanner używać tych zmiennych z contextu?
+//3. Jak zdefiniowac typ Typescript zmiennej z contextu? Przy definicji "useContext"?
 //
 import React, { useContext } from "react";
-import { Player } from "../Player/Player";
 import { PlayerBanner } from "./components/PlayerBanner";
 import { PlayerManagerContext } from "./PlayerManager";
 
-type PlayerListProps = {
-  deletePlayer: (player: Player) => void;
-  players: Player[];
-};
+import { PlayerManagerContextType } from "./PlayerManager";
 
 const PlayerList = () => {
-  const { players } = useContext<PlayerListProps>(PlayerManagerContext);
-  const { deletePlayer } = useContext<PlayerListProps>(PlayerManagerContext);
+  const { players } =
+    useContext<PlayerManagerContextType>(PlayerManagerContext);
+  const { deletePlayer } =
+    useContext<PlayerManagerContextType>(PlayerManagerContext);
   return (
     <>
       <ul className="w-full">

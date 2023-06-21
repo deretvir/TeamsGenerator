@@ -1,7 +1,9 @@
-const PlayerCreatorButton=({handleCreatePlayer})=>{
-    return(
-         <button onClick={handleCreatePlayer}>+</button>
-         )
+type BtnProps = {
+  handleCreatePlayer: () => void;
 };
 
-export {PlayerCreatorButton}
+const PlayerCreatorButton = ({ handleCreatePlayer }: BtnProps) => {
+  return <button onClick={handleCreatePlayer}>+</button>;
+};
+
+export { PlayerCreatorButton };
