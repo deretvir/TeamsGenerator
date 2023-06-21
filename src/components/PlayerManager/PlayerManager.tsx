@@ -28,11 +28,11 @@ const PlayerManager = () => {
   };
 
   return (
-    <PlayerManagerContext.Provider value={{ addPlayer }}>
+    <PlayerManagerContext.Provider value={{ addPlayer, deletePlayer, players }}>
       <div>
         <h1>Player Manager</h1>
-        <PlayerCreator addPlayer={addPlayer} />
-        <PlayerList deletePlayer={deletePlayer} players={players} />
+        <PlayerCreator />
+        <PlayerList />
       </div>
     </PlayerManagerContext.Provider>
   );

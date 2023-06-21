@@ -1,4 +1,4 @@
-import { Player } from "../Player";
+import { Player } from "./Player";
 
 type PlayerBannerProps = {
   player: Player;
@@ -14,7 +14,7 @@ const PlayerBanner = ({ player, index, deletePlayer }: PlayerBannerProps) => {
     >
       {index !== null && (
         <div className="w-12 h-full bg-orange-400 rounded-l-md flex justify-center items-center font-bold text-white">
-          {index + 1}
+          <span>{index + 1}</span>
         </div>
       )}
       <div className="bg-stone-700 h-full  w-full flex justify-start items-center px-3">
