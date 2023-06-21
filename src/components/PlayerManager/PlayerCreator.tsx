@@ -1,7 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent, useRef, useState, useContext} from "react";
 import {Player} from "../Player/Player";
 import {PlayerManagerContext}  from "./PlayerManager";
-
+import {PlayerCreatorButton} from "../PlayerManager/PlayerCreatorComponents/PlayerCreatorButton"
+import {PlayerCreatorInput} from "../PlayerManager/PlayerCreatorComponents/PlayerCreatorInput"
 
 
 type PlayerCreatorProps = {
@@ -11,7 +12,7 @@ type PlayerCreatorProps = {
 const PlayerCreator = () => {
     const [name, setName] = useState("");
     const inputRef = useRef(null);
-    const {addPlayer} = useContext(PlayerManagerContext);
+   const {addPlayer} = useContext<PlayerCreatorProps>(PlayerManagerContext);
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setName(event.target.value);
@@ -38,14 +39,13 @@ const PlayerCreator = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                value={name}
-                onChange={handleNameChange}
-                ref={inputRef}
-                onKeyDown={handleEnterKeyDown}
+            <PlayerCreatorInput
+                name={name}
+                handleNameChange={handleNameChange}
+                inputRef={inputRef}
+                handleEnterKeyDown={handleEnterKeyDown}
             />
-            <button onClick={handleCreatePlayer}>+</button>
+            <PlayerCreatorButton handleCreatePlayer={handleCreatePlayer} >+</PlayerCreatorButton>
         </div>
     );
 };

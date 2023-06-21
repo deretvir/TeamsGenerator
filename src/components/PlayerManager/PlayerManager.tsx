@@ -16,6 +16,7 @@ const PlayerManager = () => {
         const isPlayerExistInPlayers = players.some(obj=> obj.name===player.name);
        if(isPlayerExistInPlayers) return;
         setPlayers([...players, player]);
+        console.log(players)
     };
 
     const deletePlayer = (player: Player) => {
@@ -27,12 +28,13 @@ const PlayerManager = () => {
     }
 
     return (
-        <PlayerManagerContext.Provider value={{addPlayer}}>
+       <PlayerManagerContext.Provider value={{addPlayer}}>
             <div>
                 <h1>Player Manager</h1>
-                <PlayerCreator />
+                <PlayerCreator addPlayer = {addPlayer}/>
             </div>
             </PlayerManagerContext.Provider>
+        
       
     );
 };
