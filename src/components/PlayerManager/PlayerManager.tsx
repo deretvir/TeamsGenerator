@@ -30,6 +30,7 @@ function PlayerManager() {
 
   const deletePlayer = (player: Player) => {
     const indexToDelete = players.findIndex((obj) => obj.name === player.name);
+    // tutaj mozna od razu splice użyć, ale chyba lepiejj pracować na kopi?
     const updatedPlayers = players.slice().splice(indexToDelete, 1);
     setPlayers(updatedPlayers);
   };
